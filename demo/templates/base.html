@@ -1,0 +1,49 @@
+{% load translation_tags %}
+<html>
+    <head>
+        <title>Translation Demo in {{ lang|default:"en" }}</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/">Django Templates Demo</a></h1>
+            <p>
+                This is showing the usage of django template features to handle translations.  This text and basic html structure is in a base template
+                which is reused throughout the site.
+            </p>
+            Select a language: <select id="select-language">
+                <option value="en" {% if lang == "en" %}selected{% endif %}>English</option>
+                <option value="jp" {% if lang == "jp" %}selected{% endif %}>Japanese</option>
+                <option value="es" {% if lang == "es" %}selected{% endif %}>Spanish</option>
+                </select>
+        </div>
+        <div>
+            {% block 'content' %}
+            This is some default text for the `content` block.  It can also be left blank.
+
+            View translations done via:
+            <ul>
+                <li><a href="{% url 'translation_as_include' %}">As Template Includes</a></li>
+                <li><a href="{% url 'translation_as_inheritance' %}">As Template Inheritance</a></li>
+                <li><a href="{% url 'translation_as_template_tag' %}">As Template Tag</a></li>
+            </ul>
+            {% endblock 'content' %}
+        </div>
+        <script>
+            var languageSelector = document.getElementById('select-language');
+
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+
+            languageSelector.onchange = function (e) {
+                console.log('About to cookie set!');
+                setCookie("sdlLanguage", e.currentTarget.value, 1);
+                console.log('cookie set!');
+                location.reload();
+            };
+        </script>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load translation_tags %}
+{% block 'content' %}
+<h2>Via a Template Tag</h2>
+<p>
+    This is some simple, untranslated, page specific content and layout to show that there is no need to duplicate
+    layout. This appears before the translated text.  Here we use a custom template tag to merge include and the view/inheritance like behavior.
+</p>
+{% with template_name="via_includes/index.html" %}
+    Translation included from: {{ template_name }}<br>
+    {% include_trans template_name %}
+{% endwith %}
+<p>
+    And this appears after the translated text.
+</p>
+{% endblock 'content' %}

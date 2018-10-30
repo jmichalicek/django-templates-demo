@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+<h2>Via Template Inheritance</h2>
+<p>
+    This is some simple, untranslated, page specific content and layout to show that there is no need to duplicate
+    layout. This appears before the translated text.
+</p>
+{% block 'translated_text' %}{% endblock 'translated_text' %}
+<p>
+    And this appears after the translated text.
+</p>
+{% endblock 'content' %}
