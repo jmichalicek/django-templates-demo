@@ -1,5 +1,7 @@
+from __future__ import unicode_literals, absolute_import
 from django.views.generic import TemplateView
 import os
+from django.conf import settings
 
 class TranslateViaIncludes(TemplateView):
     """
@@ -19,7 +21,7 @@ class TranslateViaInheritance(TemplateView):
         This uses the cookie to determine the name of the template for the user's selected language.  It passes an english translation
         as a fallback to that, and then further falls back to the base template_name in case this page is not translated at all.
         """
-        lang = self.request.COOKIES.get('sdlLanguage') or 'en'
+        lang = self.request.COOKIES.get('sdlLanguage') or settings.LANGUAGE_CODE
         base, ext = self.template_name.split('.')
         requested = u'%s.%s.%s' % (base, lang, ext)
         default = u'%s.en.%s' % (base, ext)

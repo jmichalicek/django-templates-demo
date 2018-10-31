@@ -6,12 +6,11 @@
     This is some simple, untranslated, page specific content and layout to show that there is no need to duplicate layout.  This
     appears before the translated text.
 </p>
-{% with language=lang|default:"en" %}
-    {% with template_name="via_includes/index."|add:language|add:".html" %}
-        Translation included from: {{ template_name }}<br>
-        {% include template_name %}
-    {% endwith %}
-{% endwith %}
+{% if lang == 'jp' %}
+    {% include 'via_includes/index.jp.html' %}
+{% else %}
+    {% include 'via_includes/index.en-us.html' %}
+{% endif %}
 <p>
     And this appears after the translated text.
 </p>

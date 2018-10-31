@@ -8,10 +8,12 @@
             <h1><a href="/">Django Templates Demo</a></h1>
             <p>
                 This is showing the usage of django template features to handle translations.  This text and basic html structure is in a base template
-                which is reused throughout the site.
+                which is reused throughout the site.  Spanish has been included in the options, but no spanish translations
+                have been created to show the fallback to a default language.  The language is set in a cookie using javascript and is read
+                from the cookie on the server to specify the language in the template context.
             </p>
             Select a language: <select id="select-language">
-                <option value="en" {% if lang == "en" %}selected{% endif %}>English</option>
+                <option value="en-us" {% if lang == "en-us" %}selected{% endif %}>English</option>
                 <option value="jp" {% if lang == "jp" %}selected{% endif %}>Japanese</option>
                 <option value="es" {% if lang == "es" %}selected{% endif %}>Spanish</option>
                 </select>
@@ -39,9 +41,7 @@
             }
 
             languageSelector.onchange = function (e) {
-                console.log('About to cookie set!');
                 setCookie("sdlLanguage", e.currentTarget.value, 1);
-                console.log('cookie set!');
                 location.reload();
             };
         </script>

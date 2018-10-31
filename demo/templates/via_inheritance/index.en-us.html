@@ -1,0 +1,8 @@
+{% extends 'via_inheritance/index.html' %}
+
+{% block 'translated_text' %}
+Translation template name: via_inheritance/index.en-us.html <br>
+
+This content has been translated using template inheritance where the view determines a language specific template to
+use and blocks to override per template are specified.
+{% endblock 'translated_text' %}
